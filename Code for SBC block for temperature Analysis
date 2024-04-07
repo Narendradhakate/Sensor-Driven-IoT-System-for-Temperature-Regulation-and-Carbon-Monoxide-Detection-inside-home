@@ -1,0 +1,34 @@
+Code:
+
+from gpio import *
+from time import *
+
+
+def main():
+	pinMode(0, INPUT)
+	pinMode(1, OUT)
+	pinMode(2, OUT)
+	pinMode(3, OUT)
+	print("Room Temperature")
+	while True:
+		temp = digitalRead(0);
+		print("Temperature" ,temp)
+		if(temp>=600):
+			digitalWrite(1, HIGH);
+			digitalWrite(2, LOW);
+			customWrite (3,"Ac-ON");
+		elif(temp<590):
+			digitalWrite(2, HIGH);
+			digitalWrite(1, LOW);
+			customWrite (3,"Heater-ON");
+		else:
+			digitalWrite(2, LOW);
+			digitalWrite(1, LOW);
+			customWrite (3,"Normal-Temp");
+			
+
+		delay(1000);
+	
+
+if __name__ == "__main__":
+	main()
